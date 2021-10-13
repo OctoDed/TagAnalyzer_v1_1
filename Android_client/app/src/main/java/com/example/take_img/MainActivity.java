@@ -60,7 +60,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-//import com.google.common.util.concurrent.ListenableFuture;
+
 import com.google.gson.JsonObject;
 
 import java.io.File;
@@ -189,11 +189,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Bitmap saveToGallery(){
-        /*
-        userpic.setDrawingCacheEnabled(true);
-        //userpic.buildDrawingCache();
-        Bitmap bmp = userpic.getDrawingCache();
-        */
         BitmapDrawable draw = (BitmapDrawable) userpic.getDrawable();
         Bitmap bmp = draw.getBitmap();
         File storageLoc = Environment.getExternalStorageDirectory();
@@ -281,7 +276,6 @@ public class MainActivity extends AppCompatActivity {
                                        Response<JsonObject> response) {
                     Log.v("Upload", "success");
                     nDialog.dismiss();
-                    //tw.setText(response.body().toString());
                     JsonObject result = response.body().getAsJsonObject();
                     String description = result.get("description").getAsString();
                     String price11 = result.get("price11").getAsString();
@@ -289,16 +283,25 @@ public class MainActivity extends AppCompatActivity {
                     String price21 = result.get("price21").getAsString();
                     String price22 = result.get("price22").getAsString();
                     String barcode = result.get("barcode_data").getAsString();
+                    String price_num_card = result.get("price_num_card").getAsString();
+                    String price_num_nocard = result.get("price_num_nocard").getAsString();
+                    String Type = result.get("type").getAsString();
+                    String numType = result.get("numType").getAsString();
+                    /*
                     tw.setText("Описание: " + decrypt(description) + '\n' + "Цена без карты: " +
                             decrypt(price11) + '.' + decrypt(price21) + '\n' + "Цена по карте: " +
-                            decrypt(price22) + '.' + decrypt(price12) + '\n'
-                            + "Штрих-код: " + decrypt(barcode));
-
-                    /*
+                            decrypt(price22) + '.' + decrypt(price12) + '\n' + "Штрих-код: " +
+                            decrypt(barcode) + '\n' + "Цена за ед, карта: " +
+                            decrypt(price_num_card) + '\n' + "Цена за ед, без карты: " +
+                            decrypt(price_num_nocard) + '\n' + "Ед. измерения: " + decrypt(Type));
+*/
                     tw.setText("Описание: " + description + '\n' + "Цена без карты: " +
                             price11 + '.' + price21 + '\n' + "Цена по карте: " +
-                            price22 + '.' + price12 + '\n'
-                            + "Штрих-код: " + barcode);*/
+                            price22 + '.' + price12 + '\n' + "Штрих-код: " +
+                            barcode + '\n' + "Цена за ед, карта: " +
+                            price_num_card + '\n' + "Цена за ед, без карты: " +
+                            price_num_nocard + '\n' + "Ед. измерения: " + Type + '\n' +
+                            "Количество: " + numType);
                 }
 
                 @Override
@@ -318,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+/*
     public static String decrypt(String encryptedText) {
         String decryptedText = "";
         try {
@@ -335,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return decryptedText;
     }
-
+*/
     public void backing(View view) {
         ViewFlipper vf = (ViewFlipper) findViewById( R.id.viewFlipper );
         vf.showNext();
