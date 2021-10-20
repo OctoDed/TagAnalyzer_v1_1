@@ -1,2 +1,2 @@
-rootProject.name = "Take_Img"
+rootProject.name = "Cameraxtest"
 include ':app'
